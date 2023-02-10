@@ -49,3 +49,20 @@
 .bg-red {
     background-color: red;
 }
+
+.game-over {
+    height: 200px;
+    width: 800px;
+    border: 2px solid black;
+    font-size: 40px;
+    color: #9957d6;
+    text-align: center;
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

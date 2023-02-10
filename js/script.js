@@ -39,6 +39,9 @@ function startGame() {
 }
 
 function gridGenerator(gridSide) {
+
+	btnPlayElement.classList.remove('center')
+
 	cellNumber = gridSide ** 2;
 	//console.log(gridSide, cellNumber)
 
@@ -67,6 +70,7 @@ function gridGenerator(gridSide) {
 
 function resetGame() {
 	gridElement.innerHTML = "";
+	btnPlayElement.value = 'play'
 }
 
 function randomNumber(min, max) {
@@ -84,7 +88,7 @@ function bombGenerator() {
 		if (!bomb.includes(bombRandom)) {
 			bomb.push(bombRandom);
 		}
-		//console.log(bomb);
+		console.log(bomb);
 	}
 }
 
@@ -102,5 +106,15 @@ function bombCheck(event) {
 
 	if (bomb.includes(cellValue)) {
 		cell.classList.add("bg-red");
+		endGame()
 	}
+}
+
+function endGame() {
+	resetGame()
+	btnPlayElement.value = 'try again'
+	const messageElement = document.createElement('div')
+	messageElement.classList.add('game-over')
+	messageElement.innerHTML = '<h1 class="center">Sei appena morto...!</h1>'
+	gridElement.appendChild(messageElement)
 }
