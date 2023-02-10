@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid,
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.btn-play {
+    border-radius: 5px;
+    background-color: #9957d6;
+    text-transform: uppercase;
+    padding: 10px;
+
+}
+
+.grid > .cell {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    aspect-ratio: 1;
+    border: 2px solid black;
+}
+
+.display-none {
+    display: none;
+}
+
+.bg-violet {
+    background-color: #9957d6;
+}
