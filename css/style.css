@@ -21,6 +21,7 @@
     align-items: center;
     margin-bottom: 20px;
 }
+
 .btn-play {
     border-radius: 5px;
     background-color: #9957d6;
@@ -41,6 +42,10 @@
     display: none;
 }
 
-.bg-violet {
-    background-color: #9957d6;
+.bg-azure {
+    background-color: azure;
+}
+
+.bg-red {
+    background-color: red;
 }
