@@ -6,7 +6,7 @@ const gridElement = document.querySelector(".grid");
 
 btnPlayElement.addEventListener("click", startGame);
 //console.log('click');
-const bomb = [];
+let bomb = [];
 
 //La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile
 //di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
@@ -15,12 +15,14 @@ const bomb = [];
 
 let level = 10;
 let cellNumber;
+let counter = 0;
 
 //FUNZIONI
 
 function startGame() {
 	resetGame();
 	gridGenerator(level);
+
 	//Generiamo le bombe
 	//Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta:
 
@@ -32,16 +34,13 @@ function startGame() {
 		const cell = cellElements[i];
 
 		cell.addEventListener("click", bombCheck);
-		
 
+		cell.addEventListener("click", counterIncrease);
 	}
 	//console.log(cellElements);
 }
 
 function gridGenerator(gridSide) {
-
-	btnPlayElement.classList.remove('center')
-
 	cellNumber = gridSide ** 2;
 	//console.log(gridSide, cellNumber)
 
@@ -70,7 +69,8 @@ function gridGenerator(gridSide) {
 
 function resetGame() {
 	gridElement.innerHTML = "";
-	btnPlayElement.value = 'play'
+	counter = 0;
+	btnPlayElement.value = "play";
 }
 
 function randomNumber(min, max) {
@@ -81,6 +81,7 @@ function randomNumber(min, max) {
 }
 
 function bombGenerator() {
+	bomb = [];
 	while (bomb.length < 16) {
 		let bombRandom = randomNumber(1, cellNumber);
 		//facendo attenzione che: nella stessa cella può essere posizionata al massimo una bomba,
@@ -88,7 +89,7 @@ function bombGenerator() {
 		if (!bomb.includes(bombRandom)) {
 			bomb.push(bombRandom);
 		}
-		console.log(bomb);
+		//console.log(bomb);
 	}
 }
 
@@ -106,15 +107,39 @@ function bombCheck(event) {
 
 	if (bomb.includes(cellValue)) {
 		cell.classList.add("bg-red");
-		endGame()
+		gameOver();
 	}
 }
 
+function counterIncrease(event) {
+	cell = event.target;
+	counter += 1;
+	//console.log(counter);
+	cell.removeEventListener("click", counterIncrease);
+
+	if (counter === cellNumber - 16) {
+		endGame();
+	}
+}
+
+function gameOver() {
+	resetGame();
+	btnPlayElement.value = "try again";
+	const messageElement = document.createElement("div");
+	messageElement.classList.add("game-over");
+	messageElement.innerHTML = '<h1 class="center">Sei appena morto...!</h1>';
+	gridElement.appendChild(messageElement);
+}
+
 function endGame() {
-	resetGame()
-	btnPlayElement.value = 'try again'
-	const messageElement = document.createElement('div')
-	messageElement.classList.add('game-over')
-	messageElement.innerHTML = '<h1 class="center">Sei appena morto...!</h1>'
-	gridElement.appendChild(messageElement)
+	gridElement.innerHTML = "";
+	btnPlayElement.value = "prossimo livello";
+	const winElement = document.createElement("div");
+	winElement.classList.add("end-game");
+	winElement.innerHTML = 
+	`<div class="center">
+		<h1 class=>Complimenti! Sei sopravvissuto!!</h1>
+		<p class="counter-text">Il tuo punteggio è ${counter}</p>
+	</div>`;
+	gridElement.appendChild(winElement);
 }
