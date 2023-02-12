@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid,
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    flex-wrap: wrap;
+}
+
+.button {
+    gap: 15px;
+    padding: 20px;
+}
+
+#levels,
+#levels > *{
+    border: none;
+}
+
+.btn-play {
+    border-radius: 5px;
+    background-color: #9957d6;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+.grid > .cell {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    aspect-ratio: 1;
+    border: 2px solid black;
+}
+
+.display-none {
+    display: none;
+}
+
+.bg-azure {
+    background-color: azure;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.game-over,
+.end-game {
+    height: 200px;
+    width: 800px;
+    border: 2px solid black;
+    color: #9957d6;
+    text-align: center;
+    position: relative;
+}
+
+.game-over {
+    font-size: 40px;
+}
+
+.counter-text {
+    padding-top: 10px;
+    color: black;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
