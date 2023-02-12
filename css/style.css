@@ -5,7 +5,7 @@
 }
 
 .container {
-    max-width: 1280px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -58,6 +58,8 @@
     color: #9957d6;
     text-align: center;
     position: relative;
+    background-color: white;
+
 }
 
 .game-over {

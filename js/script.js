@@ -89,7 +89,7 @@ function bombGenerator() {
 		if (!bomb.includes(bombRandom)) {
 			bomb.push(bombRandom);
 		}
-		//console.log(bomb);
+		console.log(bomb);
 	}
 }
 
@@ -98,6 +98,7 @@ function bombCheck(event) {
 	const cell = event.target;
 	const cellValue = parseInt(event.target.innerHTML);
 	//console.log(cellClass)
+	//console.log(event)
 
 	//Quando l’utente clicca su una cella: se il numero della cella è presente nella lista dei numeri generati
 	//- abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina.
@@ -114,7 +115,7 @@ function bombCheck(event) {
 function counterIncrease(event) {
 	cell = event.target;
 	counter += 1;
-	//console.log(counter);
+	console.log(counter);
 	cell.removeEventListener("click", counterIncrease);
 
 	if (counter === cellNumber - 16) {
@@ -123,23 +124,38 @@ function counterIncrease(event) {
 }
 
 function gameOver() {
-	resetGame();
+	counter = 0;
+	stopClick();
 	btnPlayElement.value = "try again";
 	const messageElement = document.createElement("div");
-	messageElement.classList.add("game-over");
-	messageElement.innerHTML = '<h1 class="center">Sei appena morto...!</h1>';
+	messageElement.classList.add("game-over", "center");
+	messageElement.innerHTML = 
+	`<div class="center">
+		<h1 class=>Sei appena morto...!</h1>
+		<p class="counter-text">Il tuo punteggio è ${counter}</p>
+	</div>`;
 	gridElement.appendChild(messageElement);
 }
 
 function endGame() {
-	gridElement.innerHTML = "";
-	btnPlayElement.value = "prossimo livello";
 	const winElement = document.createElement("div");
-	winElement.classList.add("end-game");
-	winElement.innerHTML = 
-	`<div class="center">
+	stopClick();
+	winElement.classList.add("end-game", "center");
+	winElement.innerHTML = `<div class="center">
 		<h1 class=>Complimenti! Sei sopravvissuto!!</h1>
 		<p class="counter-text">Il tuo punteggio è ${counter}</p>
 	</div>`;
 	gridElement.appendChild(winElement);
+}
+
+function stopClick(event) {
+	const cellElements = document.querySelectorAll(".cell");
+	//console.log(cellElements)
+
+	for (let i = 0; i < cellElements.length; i++) {
+		const cell = cellElements[i];
+
+		cell.removeEventListener("click", bombCheck);
+		cell.removeEventListener("click", counterIncrease);
+	}
 }
