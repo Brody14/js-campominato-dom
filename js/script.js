@@ -124,7 +124,6 @@ function counterIncrease(event) {
 }
 
 function gameOver() {
-	counter = 0;
 	stopClick();
 	btnPlayElement.value = "try again";
 	const messageElement = document.createElement("div");
