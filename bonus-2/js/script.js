@@ -18,7 +18,7 @@ let bomb = [];
 let level = 10;
 let cellNumber;
 let counter = 0;
-const counterElement = document.querySelector('.counter').innerHTML = counter;
+const counterElement = document.querySelector('.counter').innerHTML = 0;
 gridGenerator(level);
 
 
@@ -81,6 +81,7 @@ function gridGenerator(gridSide) {
 function resetGame() {
 	gridElement.innerHTML = "";
 	counter = 0;
+	const counterElement = document.querySelector('.counter').innerHTML = counter
 	btnPlayElement.style.backgroundImage = "url(./img/smile.png)"
 
 }
